@@ -1,5 +1,3 @@
-
-
 """Sparse and TV denoising denoising classes
 
 Classes
@@ -9,7 +7,7 @@ SpitfireDenoise
 """
 
 import numpy as np
-from .wrappers._spitfire_denoise import (py_spitfire_denoise)
+from .wrappers._spitfire_denoise import (py_spitfire_denoise_2d)
 
 
 class SpitfireDenoise:
@@ -40,7 +38,7 @@ class SpitfireDenoise:
     def run(self, image: np.array):
         im = image.astype(np.float32)
         im = image / np.amax(im)
-        self.denoised_ = py_spitfire_denoise(im, self.regularization,
-                                             self.weighting,
-                                             self.model,
-                                             self.iter, 1.0)
+        self.denoised_ = py_spitfire_denoise_2d(im, self.regularization,
+                                                self.weighting,
+                                                self.model,
+                                                self.iter)

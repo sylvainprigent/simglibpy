@@ -1,3 +1,3 @@
-from .spitfire import spitfire
+from .spitfire import SpitfireDenoise
 
-__all__ = ['spitfire']
+__all__ = ['SpitfireDenoise']
