@@ -7,7 +7,9 @@ SpitfireDenoise
 """
 
 import numpy as np
-from .wrappers._spitfire_denoise import (py_spitfire_denoise_2d)
+from .wrappers._spitfire_denoise import (py_spitfire_denoise_2d,
+                                         py_spitfire_denoise_3d,
+                                         py_spitfire_denoise_4d)
 
 
 class SpitfireDenoise:
@@ -28,17 +30,34 @@ class SpitfireDenoise:
     """
 
     def __init__(self, regularization: float = 12, weighting: float = 0.6,
-                 model: str = 'HV', niter: int = 200):
+                 model: str = 'HV', niter: int = 200, deltaz: float = 1.0,
+                 deltat: float = 1.0):
         self.regularization = regularization
         self.weighting = weighting
         self.iter = niter
         self.model = model
+        self.deltaz = deltaz
+        self.deltat = deltat
         self.denoised_ = None
 
     def run(self, image: np.array):
         im = image.astype(np.float32)
         im = image / np.amax(im)
-        self.denoised_ = py_spitfire_denoise_2d(im, self.regularization,
-                                                self.weighting,
-                                                self.model,
-                                                self.iter)
+        if im.ndim == 2:
+            self.denoised_ = py_spitfire_denoise_2d(im, self.regularization,
+                                                    self.weighting,
+                                                    self.model,
+                                                    self.iter)
+        elif im.dim == 3:
+            self.denoised_ = py_spitfire_denoise_3d(im, self.regularization,
+                                                    self.weighting,
+                                                    self.model,
+                                                    self.iter,
+                                                    self.deltaz)
+        elif im.dim == 4:
+            self.denoised_ = py_spitfire_denoise_4d(im, self.regularization,
+                                                    self.weighting,
+                                                    self.model,
+                                                    self.iter,
+                                                    self.deltaz,
+                                                    self.deltat)
