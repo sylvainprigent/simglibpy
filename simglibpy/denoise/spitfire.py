@@ -48,13 +48,13 @@ class SpitfireDenoise:
                                                     self.weighting,
                                                     self.model,
                                                     self.iter)
-        elif im.dim == 3:
+        elif im.ndim == 3:
             self.denoised_ = py_spitfire_denoise_3d(im, self.regularization,
                                                     self.weighting,
                                                     self.model,
                                                     self.iter,
                                                     self.deltaz)
-        elif im.dim == 4:
+        elif im.ndim == 4:
             self.denoised_ = py_spitfire_denoise_4d(im, self.regularization,
                                                     self.weighting,
                                                     self.model,

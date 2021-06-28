@@ -20,7 +20,7 @@ def configuration(parent_package='', top_path=None):
 
     # submodules which have their own setup.py
     config.add_subpackage('denoise')
-    #config.add_subpackage('deconv')
+    config.add_subpackage('deconv')
 
     # Skip cythonization as we do not want to include the generated
     # C/C++ files in the release tarballs as they are not necessarily
