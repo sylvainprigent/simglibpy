@@ -1,8 +1,10 @@
 import os.path as osp
 import os
 
-__all__ = ['pollen',
-           'pollen_noise']
+__all__ = ['celegans',
+           'pollen',
+           'pollen_poison_noise_blurred',
+           'pollen_psf']
 
 legacy_data_dir = osp.abspath(osp.dirname(__file__))
 
@@ -40,12 +42,24 @@ def _load(f):
     Returns
     -------
     img : ndarray
-        Image loaded from ``skimage.data_dir``.
+        Image loaded from ``simglibpy.data_dir``.
     """
     # importing io is quite slow since it scans all the backends
     # we lazy import it here
     from skimage.io import imread
     return imread(_fetch(f))
+
+
+def celegans():
+    """2D confocal (Airyscan) image of a c. elegans intestine.
+
+    Returns
+    -------
+    pollen : (316, 316) uint16 ndarray
+        2D confocal image of a C. elegans intestine.
+    """
+
+    return _load("celegans.tif")
 
 
 def pollen():
@@ -73,7 +87,7 @@ def pollen_poison_noise_blurred():
 
 
 def pollen_psf():
-    """3D PSF to deconvolute the pollen image.
+    """3D PSF to deblur the pollen image.
 
     Returns
     -------
@@ -81,4 +95,4 @@ def pollen_psf():
         Corrupted pollen image.
     """
 
-    return _load("pollen_poison_noise_blurred.tif")
+    return _load("pollen_psf.tif")
