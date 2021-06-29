@@ -42,18 +42,22 @@ class SpitfireDenoise:
 
     def run(self, image: np.array):
         im = image.astype(np.float32)
+        imin = np.amin(im)
+        imax = np.amax(im)
         im = image / np.amax(im)
         if im.ndim == 2:
             self.denoised_ = py_spitfire_denoise_2d(im, self.regularization,
                                                     self.weighting,
                                                     self.model,
                                                     self.iter)
+            self.denoised_ = self.denoised_ * (imax - imin) + imin
         elif im.ndim == 3:
             self.denoised_ = py_spitfire_denoise_3d(im, self.regularization,
                                                     self.weighting,
                                                     self.model,
                                                     self.iter,
                                                     self.deltaz)
+            self.denoised_ = self.denoised_ * (imax - imin) + imin
         elif im.ndim == 4:
             self.denoised_ = py_spitfire_denoise_4d(im, self.regularization,
                                                     self.weighting,
@@ -61,3 +65,5 @@ class SpitfireDenoise:
                                                     self.iter,
                                                     self.deltaz,
                                                     self.deltat)
+            self.denoised_ = self.denoised_ * (imax - imin) + imin
+        return self.denoised_
