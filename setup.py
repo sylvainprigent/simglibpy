@@ -34,7 +34,7 @@ MAINTAINER = 'Sylvain Prigent'
 MAINTAINER_EMAIL = 'sylvain.prigent@inria.fr'
 URL = 'https://simglib.github.io'
 DOWNLOAD_URL = 'https://github.com/simglib/simglibpy'
-LICENSE = '???'
+LICENSE = 'GPL-3.0'
 PROJECT_URLS = {
     'Bug Tracker': 'https://github.com/simglib/simglibpy/issues',
     'Documentation': '',
