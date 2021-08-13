@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from .wrappers._psfs import py_gibson_lanni_psf
 
 
 class PSFGaussian:
@@ -45,4 +46,53 @@ class PSFGaussian:
                                                       - pow(z-z0, 2) * sigma_z2)
         else:
             raise Exception('PSFGaussian: can generate only 2D or 3D PSFs')
+        return self.psf_
+
+
+class PSFGibsonLanni:
+    """Generate a Gibson-Lanni PSF
+
+    Parameters
+    ----------
+    shape: tuple
+        Size of the PSF array in each dimension
+    res_lateral: float
+        Lateral resolution
+    res_axial: float
+        Axial resolution
+    numerical_aperture: float
+        Numerical aperture
+    lambd: float
+        Illumination wavelength
+    ti0: float
+        Working distance
+    ni: float
+        Refractive index immersion
+    ns: float
+        Refractive index sample
+
+    """
+
+    def __init__(self, shape, res_lateral=100, res_axial=250,
+                 numerical_aperture=1.4, lambd=610,
+                 ti0=150, ni=1.5, ns=1.33):
+        self.shape = shape
+        self.res_lateral = res_lateral
+        self.res_axial = res_axial
+        self.numerical_aperture = numerical_aperture
+        self.lambd = lambd
+        self.ti0 = ti0
+        self.ni = ni
+        self.ns = ns
+        self.psf_ = None
+
+    def run(self):
+        """Calculate the PSF image"""
+
+        self.psf_ = py_gibson_lanni_psf(self.shape[2], self.shape[1],
+                                        self.shape[0],
+                                        self.res_lateral, self.res_axial,
+                                        self.numerical_aperture, self.lambd,
+                                        self.ti0, self.ni, self.ns)
+        self.psf_ = np.transpose(self.psf_, (2, 0, 1))
         return self.psf_
