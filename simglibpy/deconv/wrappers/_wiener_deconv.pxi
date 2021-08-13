@@ -1,4 +1,4 @@
-cdef extern from "simglib/sdeconv/swiener.h" namespace "SImg":
+cdef extern from "swiener.h" namespace "SImg":
 
     void wiener_deconv_2d(float* buffer_in, float* psf, float* buffer_out, unsigned int sx, unsigned int sy,
                           const float& lambda_, const int& connectivity)

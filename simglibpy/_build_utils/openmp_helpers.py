@@ -81,7 +81,7 @@ def check_openmp_support():
         openmp_supported = False
 
     if not openmp_supported:
-        if os.getenv("RESTORATIONPY_FAIL_NO_OPENMP"):
+        if os.getenv("SIMGLIBPY_FAIL_NO_OPENMP"):
             raise CompileError("Failed to build with OpenMP")
         else:
             message = textwrap.dedent(
@@ -91,16 +91,16 @@ def check_openmp_support():
                                 * WARNING *
                                 ***********
 
-                It seems that restorationpy cannot be built with OpenMP.
+                It seems that simglibpypy cannot be built with OpenMP.
 
                 - Make sure you have followed the installation instructions:
 
-                    https://restorationpy.org/dev/developers/advanced_installation.html
+                    https://github.com/sulvainprigent/simglib
 
                 - If your compiler supports OpenMP but you still see this
                   message, please submit a bug report at:
 
-                    https://github.com/serpico/restorationpy/issues
+                    https://github.com/sulvainprigent/simglib/issues
 
                 - The build will continue with OpenMP-based parallelism
                   disabled. Note however that some estimators will run in

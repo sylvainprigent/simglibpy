@@ -1,4 +1,4 @@
-cdef extern from "simglib/sdeconv/spitfire2d.h" namespace "SImg":
+cdef extern from "spitfire2d.h" namespace "SImg":
 
     void spitfire2d_deconv_sv(float *blurry_image, unsigned int sx, unsigned int sy, float *psf,
                               float *deconv_image, const float &regularization, const float &weighting,
@@ -9,7 +9,7 @@ cdef extern from "simglib/sdeconv/spitfire2d.h" namespace "SImg":
                               const unsigned int &niter)
 
 
-cdef extern from "simglib/sdeconv/spitfire3d.h" namespace "SImg":
+cdef extern from "spitfire3d.h" namespace "SImg":
 
     void spitfire3d_deconv_sv(float *blurry_image, unsigned int sx, unsigned int sy, unsigned int sz,
                               float *psf, float *deconv_image, const float &regularization,

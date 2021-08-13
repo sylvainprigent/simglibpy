@@ -1,4 +1,4 @@
-cdef extern from "simglib/sdeconv/srichardsonlucy.h" namespace "SImg":
+cdef extern from "srichardsonlucy.h" namespace "SImg":
 
     void richardsonlucy_2d(float* buffer_in, float* psf, float* buffer_out, unsigned int sx,
                            unsigned int sy, unsigned int niter)

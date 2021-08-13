@@ -13,36 +13,47 @@ def configuration(parent_package='', top_path=None):
         libraries.append('m')
 
     config.add_extension('_spitfire_deconv',
-                         sources=['_spitfire_deconv.pyx'],
+                         sources=['_spitfire_deconv.pyx',
+                                  'SObserver.cpp', 'SObservable.cpp',
+                                  'SShift.cpp', 'SMath.cpp', 'SNormalize.cpp',
+                                  'spitfire2d.cpp', 'spitfire3d.cpp'],
                          include_dirs=[numpy.get_include()],
-                         libraries=['fftw3f', 'score', 'smanipulate', 'sfft', 'sdeconv'] + libraries,
+                         libraries=['fftw3f'] + libraries,
                          language='c++',
                          extra_link_args=['-lstdc++'],
                          extra_compile_args=['-std=c++11', '-v']
                          )
 
     config.add_extension('_richardson_lucy_deconv',
-                         sources=['_richardson_lucy_deconv.pyx'],
+                         sources=['_richardson_lucy_deconv.pyx',
+                                  'SFFT.cpp', 
+                                  'SObserver.cpp', 'SObservable.cpp',
+                                  'srichardsonlucy.cpp', 'SShift.cpp',
+                                  'SObserverConsole.cpp'],
                          include_dirs=[numpy.get_include()],
-                         libraries=['fftw3f', 'score', 'smanipulate', 'sfft', 'sdeconv'] + libraries,
+                         libraries=['fftw3f'] + libraries,
                          language='c++',
                          extra_link_args=['-lstdc++'],
                          extra_compile_args=['-std=c++11', '-v']
                          )
 
     config.add_extension('_wiener_deconv',
-                         sources=['_wiener_deconv.pyx'],
+                         sources=['_wiener_deconv.pyx',
+                                  'SFFT.cpp', 'sutils.cpp',
+                                  'SObserver.cpp', 'SObservable.cpp',
+                                  'swiener.cpp', 'SShift.cpp'],
                          include_dirs=[numpy.get_include()],
-                         libraries=['fftw3f', 'score', 'smanipulate', 'sfft', 'sdeconv'] + libraries,
+                         libraries=['fftw3f'] + libraries,
                          language='c++',
                          extra_link_args=['-lstdc++'],
                          extra_compile_args=['-std=c++11', '-v']
                          )
 
     config.add_extension('_psfs',
-                         sources=['_psfs.pyx'],
+                         sources=['_psfs.pyx', 
+                                  'sgibsonlannipsf.cpp', 'sgaussianpsf.cpp'],
                          include_dirs=[numpy.get_include()],
-                         libraries=['fftw3f', 'score', 'smanipulate', 'sfft', 'sdeconv'] + libraries,
+                         libraries=['fftw3f'] + libraries,
                          language='c++',
                          extra_link_args=['-lstdc++'],
                          extra_compile_args=['-std=c++11', '-v']

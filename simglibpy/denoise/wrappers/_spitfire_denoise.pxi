@@ -1,4 +1,4 @@
-cdef extern from "simglib/sdenoise/spitfire2d.h" namespace "SImg":
+cdef extern from "spitfire2d.h" namespace "SImg":
 
     void spitfire2d_sv(float* noisy_image, unsigned int sx, unsigned int sy, float* denoised_image,
                        const float& regularization, const float& weighting, const unsigned int& niter)
@@ -7,7 +7,7 @@ cdef extern from "simglib/sdenoise/spitfire2d.h" namespace "SImg":
                        const float& regularization, const float& weighting, const unsigned int& niter)
 
 
-cdef extern from "simglib/sdenoise/spitfire3d.h" namespace "SImg":
+cdef extern from "spitfire3d.h" namespace "SImg":
 
     void spitfire3d_sv(float* noisy_image, unsigned int sx, unsigned int sy, unsigned int sz,
                        float* denoised_image, const float& regularization, const float& weighting,
@@ -18,7 +18,7 @@ cdef extern from "simglib/sdenoise/spitfire3d.h" namespace "SImg":
                        const unsigned int& niter, const float& delta)
 
 
-cdef extern from "simglib/sdenoise/spitfire4d.h" namespace "SImg":
+cdef extern from "spitfire4d.h" namespace "SImg":
 
     void spitfire4d_sv(float* noisy_image, unsigned int sx, unsigned int sy, unsigned int sz,
                        unsigned int st, float* denoised_image, const float& regularization,
